@@ -22,7 +22,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 # MTL algorithms
-from . import MTL, TF, CS
+from . import MTL, TF, CS, MR
 
 # Utility functions
 from ..utility import *
@@ -131,7 +131,8 @@ class train_MTL():
                 "is_MRN": False,
                 "is_TF": False,
                 "is_CS": False,
-                "is_sluice": False
+                "is_sluice": False,
+                "is_MR": False
             }
         for key in p_default:
             if not hasattr(self, key):
@@ -174,14 +175,22 @@ class train_MTL():
             self.metrics["sluice_beta_init"] = self.sluice_beta_init
             self.metrics["sluice_orthogonal_loss_coef"] = self.sluice_orthogonal_loss_coef
 
+        # Maximum roaming network specific params
+        self.metrics["is_MR"] = self.is_MR
+        if self.is_MR:
+            self.metrics["MR_p"] = self.MR_p
+            self.metrics["MR_freq"] = self.MR_freq
+
         self.is_MTL = len(self.task_layer_sizes) > 0
 
         # Check variables
-        assert (self.is_TF + self.is_MRN + self.is_CS + self.is_sluice) < 2, "ERROR: Multiple model types selected."
-        assert not (self.is_TF and len(self.shared_layer_sizes) > 0), "ERROR: Can't be both shared layers with factorisation model."
+        assert (self.is_TF + self.is_MRN + self.is_CS + self.is_sluice + self.is_MR) < 2, "ERROR: Multiple model types selected."
+        assert not (self.is_TF and len(self.shared_layer_sizes) > 0), "ERROR: Can't share layers with factorisation model."
 
         # Create models
-        if self.is_TF:
+        if self.is_MR:
+            self.model = MR.MTL_Net_MR(self.num_inputs, self.shared_layer_sizes, self.task_layer_sizes, self.num_tasks, self.MR_p, self.MR_freq)
+        elif self.is_TF:
             self.model = TF.MTL_Net_TF(self.num_inputs, self.task_layer_sizes, self.num_tasks, self.TF_method, self.TF_k)
         elif self.is_CS:
             self.model = CS.MTL_Net_CS(self.num_inputs, self.task_layer_sizes, self.num_tasks, False, 1, "balanced")
