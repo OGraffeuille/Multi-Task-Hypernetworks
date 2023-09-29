@@ -15,6 +15,7 @@ We include the following algorithm implementations:
 * Maximum Roaming Multi-Task Learning - src\MTL\MR.py
 
 We also include a working Jupyter notebook example - example_experiments.ipynb
+
 And the data generator for the synthetic datasets - generate_synthetic_datasets.ipynb
 
 ### Dependencies
