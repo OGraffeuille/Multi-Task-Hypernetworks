@@ -23,7 +23,7 @@ def get_data(data_name, STL_metadata=False, STL_onehot=False,                   
              add_one_hot_features=False, one_hot_labels=False):
     filenames_dict = {
         "Cubic":                r"cubic\cubic_{}.csv",
-        "Chlorophyll":          r"chlorophyll\chlorophyll_{}.csv",
+        "Water Quality":        r"water_quality\water_quality_{}.csv",
         "Algorithms":           r"algorithms\algorithms_{}.csv",
         "Robot Arm":            r"robot_arm\robot_arm_{}.csv"
     }
