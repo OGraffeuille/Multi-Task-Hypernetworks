@@ -1,5 +1,5 @@
 # Multi-Task Hypernetworks using PyTorch
-This is the PyTorch source code for "Metadata-driven Multi-Task Learning with Hypernetworks".
+This is the PyTorch source code for "Remote Sensing for Water Quality: A Multi-Task, Metadata-Driven Hypernetwork Approach".
 
 ### Included
 We include the following algorithm implementations:
