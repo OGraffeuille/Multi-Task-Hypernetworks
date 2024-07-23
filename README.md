@@ -1,5 +1,5 @@
 # Multi-Task Hypernetworks using PyTorch
-This is the PyTorch source code for "Remote Sensing for Water Quality: A Multi-Task, Metadata-Driven Hypernetwork Approach".
+This is the PyTorch source code for "Remote Sensing for Water Quality: A Multi-Task, Metadata-Driven Hypernetwork Approach" [IJCAI 2024]
 
 ### Included
 We include the following algorithm implementations:
